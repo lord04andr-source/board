@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TACTICAL BOARD — футбольна дошка</title>
+<style>
+:root{--bg:#111820;--panel:#1a242e;--panel2:#202d38;--line:#33424f;--text:#edf3f7;--muted:#a6b5c0;--accent:#48d597;--pitch:#267447;--pitch2:#216840}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.4 Inter,Segoe UI,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:#263541;color:var(--text);border-radius:8px;padding:8px 10px}button:hover{background:#344754}button.primary{background:var(--accent);color:#082318;border-color:var(--accent);font-weight:700}button.active{outline:2px solid var(--accent)}input,select,textarea{background:#111a22;border:1px solid var(--line);color:var(--text);border-radius:7px;padding:8px;min-width:0;width:100%}label{display:block;color:var(--muted);font-size:12px;margin:7px 0 4px}.topbar{height:auto;min-height:62px;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);background:#151e27}.brand{font-weight:800;letter-spacing:1.5px;font-size:16px;margin-right:auto}.brand span{color:var(--accent)}.app{display:grid;grid-template-columns:255px minmax(300px,1fr) 270px;min-height:calc(100vh - 62px)}aside{background:var(--panel);padding:14px;border-right:1px solid var(--line);overflow:auto}aside.right{border-right:0;border-left:1px solid var(--line)}.section{padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid var(--line)}.section:last-child{border:0}.section h3{margin:0 0 10px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#c1d0da}.row{display:flex;gap:7px;align-items:center}.row>*{flex:1}.row button{white-space:nowrap}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:7px}.main{padding:14px;min-width:0;display:flex;flex-direction:column;gap:10px}.toolbar{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.toolbar button{padding:7px 9px}.pitch-wrap{flex:1;min-height:450px;background:#0d141a;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;align-items:center;justify-content:center;overflow:hidden}.pitch{display:block;width:100%;height:auto;max-height:calc(100vh - 240px);aspect-ratio:1000/620;touch-action:none;user-select:none}.print-title{display:none}.canvas-heading{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#19252e;border:1px solid var(--line);border-radius:9px}.canvas-heading label{margin:0;white-space:nowrap}.canvas-heading input{font-size:17px;font-weight:700;background:#101820}.field-upload{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:end}.field-upload button{white-space:nowrap}.status{color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.player-list{display:flex;flex-direction:column;gap:5px;margin-top:8px;max-height:200px;overflow:auto}.player-item{display:flex;align-items:center;gap:7px;background:var(--panel2);border:1px solid var(--line);padding:6px;border-radius:8px}.player-item .mini{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;color:#122019;font-weight:800;flex:none}.player-item .pname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.player-item button{padding:4px 7px}.hint{color:var(--muted);font-size:12px;margin-top:6px}.pill{font-size:11px;padding:3px 7px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}.library-item{display:flex;align-items:center;gap:6px;padding:8px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;margin:6px 0}.library-item span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.library-item button{padding:5px 7px}.hidden{display:none!important}.small{font-size:12px;color:var(--muted)}.danger{border-color:#7e4545;color:#ffb6b6}.photo-preview{width:54px;height:54px;object-fit:cover;border-radius:8px;background:#111a22;border:1px solid var(--line)}.empty{color:var(--muted);font-size:12px;padding:10px 0}.palette{display:flex;gap:7px;flex-wrap:wrap;margin:6px 0 10px}.swatch{width:27px;height:27px;min-width:27px;padding:0;border-radius:50%;border:2px solid #ffffff55;box-shadow:inset 0 0 0 1px #0003}.swatch.active{outline:2px solid var(--accent);outline-offset:2px}.pdf-sheet{page-break-after:always;break-after:page;padding:0;color:#111}.pdf-sheet.landscape{page:landscape}.pdf-sheet.portrait{page:portrait}.pdf-sheet:last-child{page-break-after:auto;break-after:auto}.pdf-sheet h1{font-size:22pt;margin:0 0 4mm}.pdf-sheet .pdf-desc{white-space:pre-wrap;font-size:10pt;margin:0 0 4mm}.pdf-sheet svg{width:100%;height:165mm;display:block;overflow:visible}.pdf-sheet.portrait svg{height:230mm}.pdf-sheet .pdf-title{font-size:22pt;font-weight:800;margin:0 0 4mm}.pdf-sheet footer{font-size:9pt;color:#555;margin-top:3mm}#pdfBatchPrint{display:none}.board-tab{display:flex;align-items:center;gap:4px}.board-tab button{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pdf-check{display:flex;gap:10px;align-items:center;padding:9px;border-bottom:1px solid var(--line)}.pdf-check input{width:auto}
+
+/* Responsive layout: desktop, tablet and phone */
+html{min-width:0;scroll-behavior:smooth}body{min-width:0;min-height:100vh;overflow-x:hidden}
+.app{width:100%;grid-template-columns:minmax(205px,255px) minmax(0,1fr) minmax(230px,270px)}
+.main,aside{min-width:0}.pitch-wrap{width:100%;min-width:0}.pitch{max-width:100%;max-height:none}
+.topbar button{min-height:38px}
+@media(max-width:1180px){.app{grid-template-columns:minmax(190px,220px) minmax(0,1fr)}aside.right{grid-column:1/-1;border-left:0;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.pitch{max-height:none}.main{padding:12px}}
+@media(max-width:800px){.topbar{position:relative;padding:10px;gap:7px}.brand{width:100%;font-size:15px}.topbar button{flex:1 1 auto;min-width:0;padding:9px 10px}.app{display:flex;flex-direction:column;min-height:0}.main{order:0;padding:10px}.pitch-wrap{min-height:0;padding:6px;border-radius:9px;aspect-ratio:auto}.pitch{width:100%;height:auto;max-height:none;aspect-ratio:1000/620}.toolbar{gap:6px}.toolbar button{min-height:40px;padding:8px 10px}.canvas-heading{align-items:stretch;flex-direction:column;gap:5px}.canvas-heading label{white-space:normal}.canvas-heading input{width:100%}aside{order:1;border-right:0;border-top:1px solid var(--line);padding:12px;overflow:visible}aside.right{order:2;display:block;border-left:0;border-top:1px solid var(--line)}.section{margin-bottom:10px;padding-bottom:10px}.player-list{max-height:180px}.board-tab button{max-width:140px}.status{font-size:11px}}
+@media(max-width:520px){body{font-size:14px}.topbar{gap:6px}.topbar button{flex:1 1 calc(50% - 6px);font-size:13px}.main{padding:7px;gap:8px}.toolbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.toolbar button{white-space:normal;min-width:0;min-height:42px;padding:7px 4px;font-size:12px;line-height:1.2}.toolbar span[style*="flex:1"]{display:none}.toolbar #deleteBtn,.toolbar #clearBtn{grid-column:span 3}.pitch-wrap{padding:3px}.pitch{width:100%;height:auto;aspect-ratio:1000/620;touch-action:none}.board-tab{max-width:100%;flex:none}.board-tab button{max-width:112px;padding:7px;font-size:12px}.main #boardTabs{display:flex;overflow-x:auto;flex-wrap:nowrap;align-items:center}.row{gap:6px}.row button{white-space:normal;padding:8px 6px;font-size:13px}.grid2{gap:5px}aside{padding:10px}.field-upload{grid-template-columns:minmax(0,1fr)}.field-upload button{width:100%}.pdf-check{font-size:14px}.pdf-check input{width:20px;height:20px;flex:none}#pdfPicker{padding:10px!important}#pdfPicker>div{padding:14px!important;max-height:90vh!important}.status{flex-direction:column;gap:4px}.palette{gap:9px}.swatch{width:32px;height:32px;min-width:32px}}
+@media(hover:none){button{ -webkit-tap-highlight-color:transparent}input,select,textarea{font-size:16px}button:hover{background:#263541}}
+
+@media print{body{background:white;color:#111}.topbar,aside,.toolbar,.status,.no-print{display:none!important}#pdfBatchPrint{display:block!important}body.batch-print .app{display:none!important}.app{display:block;min-height:0}.main{padding:0}.pitch-wrap{border:0;background:white;padding:0;min-height:0;height:175mm}.pitch{min-height:0;max-height:none;height:175mm;width:100%}.print-title{display:block!important;color:#111;font-size:18pt;font-weight:bold;margin:0 0 5mm}.print-desc{display:block!important;color:#222;white-space:pre-wrap;margin:0 0 5mm}.print-footer{display:block!important;color:#555;font-size:9pt;margin-top:4mm}@page landscape{size:A4 landscape;margin:12mm}@page portrait{size:A4 portrait;margin:12mm}body{page:landscape}body.portrait-print{page:portrait}body.portrait-print .pitch-wrap{height:230mm!important}body.portrait-print .pitch{height:230mm!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">TACTICAL <span>BOARD</span> <small style="font-weight:400;color:#a6b5c0;letter-spacing:0">/ футбольна дошка</small></div>
+  <button id="undoBtn" title="Скасувати (Ctrl+Z)">↶ Скасувати</button><button id="redoBtn" title="Повторити (Ctrl+Y)">↷ Повторити</button>
+  <button id="newBtn">＋ Нова дошка</button><button id="saveBtn" class="primary">Зберегти</button><button id="pdfBtn">⇩ PDF поточної</button><button id="addPdfBtn">＋ Додати до PDF</button><button id="batchPdfBtn">PDF добірки (0)</button>
+</header>
+<div class="app">
+<aside>
+  <div class="section">
+    <h3>Поле</h3>
+    <label>Власне зображення поля</label><input id="fieldImage" type="file" accept="image/*"><button id="clearFieldImage" style="width:100%;margin-top:6px">Повернути стандартне поле</button><div class="hint">Можна завантажити своє зображення поля. Воно стане фоном для гравців і позначок.</div>
+    <label>Формат поля</label>
+    <select id="fieldType"><option value="full">Повне поле</option><option value="half">Половина поля</option></select>
+    <label>Орієнтація</label><select id="orientation"><option value="landscape">Горизонтальна</option><option value="portrait">Вертикальна</option></select>
+    <label>Стиль</label><select id="pitchStyle"><option value="grass">Газон</option><option value="clean">Мінімалістичне</option><option value="light">Світле</option></select>
+  </div>
+  <div class="section">
+    <h3>Моя команда</h3>
+    <div class="row"><div><label>Номер</label><input id="playerNumber" type="number" min="0" max="99" value="10"></div><div><label>Прізвище</label><input id="playerName" placeholder="Шевченко"></div></div>
+    <label>Позиція (необов'язково)</label><input id="playerPosition" placeholder="Нападник">
+    <label>Колір гравців</label><input id="ownColor" type="color" value="#f4f6f8">
+    <label>Фото гравця</label><input id="playerPhoto" type="file" accept="image/*">
+    <div class="row" style="margin-top:8px"><button id="addPlayerBtn" class="primary">＋ Додати гравця</button><button id="clearPhotoBtn">Очистити фото</button></div>
+    <div class="hint">Додай гравців у список, а потім натискай на ім’я, щоб обрати, або перетягни маркер на поле.</div>
+    <div id="ownPlayers" class="player-list"></div>
+  </div>
+  <div class="section">
+    <h3>Суперник</h3>
+    <label>Підпис (необов’язково)</label><input id="oppName" placeholder="Гравець">
+    <label>Колір суперника</label><input id="oppColor" type="color" value="#ef5555">
+    <button id="addOppBtn" style="width:100%;margin-top:8px">＋ Додати суперника</button>
+    <div id="oppPlayers" class="player-list"></div>
+  </div>
+</aside>
+<main class="main">
+  <div class="toolbar">
+    <button data-tool="select" class="active">↖ Вибір</button><button data-tool="arrow">➜ Стрілка</button><button data-tool="dashed">⇢ Пунктир</button><button data-tool="curve">⌒ Дугова</button><button data-tool="line">／ Лінія</button><button data-tool="text">T Текст</button><button data-tool="circle">○ Коло</button><button data-tool="rect">□ Зона</button><button data-tool="ball">⚽ М’яч</button><button data-tool="chip">▲ Фішка</button><button data-tool="zigzag">〽 Зигзаг-стрілка</button>
+    <span style="flex:1"></span><button id="deleteBtn" class="danger">Видалити вибране</button><button id="clearBtn" class="danger">Очистити поле</button>
+  </div>
+  <div id="boardTabs" class="toolbar no-print" style="padding:5px 0;border-bottom:1px solid var(--line)"></div>
+  <div class="canvas-heading no-print"><label for="canvasTitle">НАЗВА РОЗІГРАШУ / СХЕМИ</label><input id="canvasTitle" value="Тактична схема" placeholder="Наприклад: Вихід з-під пресингу"></div>
+  <div class="print-title" id="printTitle">Тактична схема</div><div class="print-desc hidden" id="printDesc"></div>
+  <div class="pitch-wrap"><svg id="pitch" class="pitch" viewBox="0 0 1000 620" role="img" aria-label="Тактичне футбольне поле"></svg></div>
+  <div class="status"><span id="statusText">Інструмент: вибір · Обери гравця у списку та постав його на поле</span><span>Автозбереження в браузері</span></div>
+  <div class="print-footer hidden" id="printFooter"></div>
+</main>
+<aside class="right">
+  <div class="section">
+    <h3>Вибраний об’єкт</h3>
+    <div id="noSelection" class="empty">Вибери гравця, стрілку або інший об’єкт на полі.</div>
+    <div id="selectionPanel" class="hidden">
+      <label>Підпис / текст</label><input id="selLabel" placeholder="Підпис">
+      <label>Колір об’єкта — 10 кольорів</label><input id="selColor" type="color" value="#ffd34f" class="hidden"><div id="selPalette" class="palette"></div>
+      <label>Форма об’єкта</label><select id="selShape"><option value="default">За замовчуванням</option><option value="arrow">Стрілка</option><option value="line">Пряма лінія</option><option value="dashed">Пунктирна стрілка</option><option value="curve">Дугова стрілка</option><option value="circle">Коло</option><option value="rect">Прямокутна зона</option><option value="square">Квадратна фішка</option><option value="diamond">Ромб</option><option value="ball">М’яч</option><option value="chip">Фішка</option><option value="zigzag">Зигзаг-стрілка</option></select>
+      <label>Розмір / товщина</label><input id="selSize" type="range" min="1" max="12" value="3">
+      <label>Довжина / ширина об’єкта</label><input id="selWidth" type="range" min="20" max="400" value="100">
+      <label>Висота об’єкта</label><input id="selHeight" type="range" min="20" max="400" value="100">
+      <button id="applySelection" class="primary" style="width:100%;margin-top:8px">Застосувати</button>
+      <div id="photoEditorWrap"><label>Фото вибраного гравця</label><input id="editPhoto" type="file" accept="image/*"></div>
+    </div>
+  </div>
+  <div class="section">
+    <h3>Дошка / PDF</h3>
+    <label>Назва схеми</label><input id="boardTitle" value="Тактична схема">
+    <label>Опис та нотатки тренера</label><textarea id="boardDesc" rows="4" placeholder="Мета, завдання, ключові деталі..."></textarea>
+    <label>Колір нових позначок — 10 кольорів</label><input id="arrowColor" type="color" value="#ffd34f" class="hidden"><div id="arrowPalette" class="palette"></div>
+    <label>Пошук у бібліотеці</label><input id="librarySearch" placeholder="Назва схеми..." />
+  </div>
+  <div class="section">
+    <h3>Бібліотека матеріалів</h3>
+    <div class="row"><button id="saveLibraryBtn" class="primary">Зберегти копію</button><button id="exportProjectBtn">Експорт проєкту</button></div>
+    <label>Імпорт проєкту</label><input id="importProject" type="file" accept=".json,application/json">
+    <div class="hint">Бібліотека зберігається локально в цьому браузері.</div>
+    <div id="libraryList"></div>
+  </div>
+</aside>
+</div>
+<div id="pdfPicker" class="hidden no-print" style="position:fixed;inset:0;background:#000b;z-index:9999;align-items:center;justify-content:center;padding:20px"><div style="background:#17232d;border:1px solid #455663;border-radius:12px;padding:20px;width:min(520px,100%);max-height:85vh;overflow:auto"><h2 style="margin-top:0">Вибери дошки для PDF</h2><div id="pdfBoardChoices"></div><div class="row" style="margin-top:14px"><button id="cancelPdfPicker">Скасувати</button><button id="confirmPdfPicker" class="primary">Створити один PDF</button></div></div></div><div id="pdfBatchPrint"></div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id), svg=$('pitch');
+const NS='http://www.w3.org/2000/svg';
+let state={title:'Тактична схема',desc:'',fieldType:'full',orientation:'landscape',pitchStyle:'grass',fieldImage:null,players:[],objects:[],selected:null,tool:'select',arrowColor:'#FFD34F',ownColor:'#F4F6F8',oppColor:'#FF5A5F'};
+let undoStack=[],redoStack=[],library=JSON.parse(localStorage.getItem('tb_library')||'[]'),drag=null,drawStart=null,photoData=null;
+let boards=[],activeBoardId=null;
+const PALETTE=[{name:'Білий',hex:'#F4F6F8'},{name:'Жовтий',hex:'#FFD34F'},{name:'Червоний',hex:'#FF5A5F'},{name:'Синій',hex:'#3984FF'},{name:'Зелений',hex:'#34D399'},{name:'Помаранчевий',hex:'#FB923C'},{name:'Фіолетовий',hex:'#A78BFA'},{name:'Чорний',hex:'#17212A'},{name:'Бірюзовий',hex:'#2DD4BF'},{name:'Рожевий',hex:'#F472B6'}];
+const clone=o=>JSON.parse(JSON.stringify(o));
+function snapshot(){undoStack.push(clone(state));if(undoStack.length>80)undoStack.shift();redoStack=[];persist();updateUndo()}
+function persist(){try{localStorage.setItem('tb_autosave',JSON.stringify(state));localStorage.setItem('tb_library',JSON.stringify(library));if(boards.length&&activeBoardId){const b=boards.find(x=>x.id===activeBoardId);if(b){b.state=clone(state);b.name=state.title||b.name}localStorage.setItem('tb_boards',JSON.stringify(boards));localStorage.setItem('tb_active_board',activeBoardId)}}catch(e){$('statusText').textContent='Недостатньо місця для автозбереження. Експортуй проєкт.'}}
+function restore(){const s=localStorage.getItem('tb_autosave');if(s){try{state=JSON.parse(s)}catch(e){}}try{boards=JSON.parse(localStorage.getItem('tb_boards')||'[]')}catch(e){boards=[]}activeBoardId=localStorage.getItem('tb_active_board');if(!boards.length){boards=[{id:id(),name:state.title||'Дошка 1',state:clone(state)}];activeBoardId=boards[0].id}const b=boards.find(x=>x.id===activeBoardId)||boards[0];activeBoardId=b.id;state=clone(b.state);localStorage.setItem('tb_boards',JSON.stringify(boards));renderBoardTabs()}
+function updateUndo(){$('undoBtn').disabled=!undoStack.length;$('redoBtn').disabled=!redoStack.length}
+function el(tag,attrs={},parent=svg){const n=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));parent.appendChild(n);return n}
+function textNode(parent,x,y,txt,attrs={}){const n=el('text',{x,y,...attrs},parent);n.textContent=txt;return n}
+function dims(){return state.orientation==='portrait'?{w:620,h:1000}:{w:1000,h:620}}
+function fieldPoint(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const m=svg.getScreenCTM();if(!m)return{x:500,y:310};const q=p.matrixTransform(m.inverse());let x=q.x,y=q.y;if(state.orientation==='portrait'){x=1000-q.y;y=q.x}return{x:Math.max(0,Math.min(1000,x)),y:Math.max(0,Math.min(620,y))}}
+function pitchMarkup(){
+ const d=dims();svg.setAttribute('viewBox',`0 0 ${d.w} ${d.h}`);
+ // Coordinate transform into a landscape logical pitch, rotate for portrait.
+ const root=el('g',state.orientation==='portrait'?{transform:'translate(0 1000) rotate(-90)'}:{});
+ const fieldW=1000,fieldH=620;
+ const fill=state.pitchStyle==='light'?'#dce6df':state.pitchStyle==='clean'?'#27764a':'#267447';
+ if(state.fieldImage){el('image',{x:0,y:0,width:fieldW,height:fieldH,href:state.fieldImage,preserveAspectRatio:'none'},root)}else{
+ el('rect',{x:0,y:0,width:fieldW,height:fieldH,fill:fill,rx:4},root);
+ if(state.pitchStyle==='grass'){for(let i=0;i<10;i++)el('rect',{x:i*100,y:0,width:50,height:620,fill:i%2?'#216840':'#2a7a4c',opacity:.35},root)}
+ }
+ const stroke=state.fieldImage?'#ffffff':state.pitchStyle==='light'?'#65796d':'#f4fff6';
+ const line=(x1,y1,x2,y2,w=2)=>el('line',{x1,y1,x2,y2,stroke,'stroke-width':w,opacity:.92},root);
+ const rect=(x,y,width,height)=>el('rect',{x,y,width,height,fill:'none',stroke,'stroke-width':2},root);
+ if(!state.fieldImage){
+ rect(8,8,984,604);
+ if(state.fieldType==='full'){
+  line(500,8,500,612);el('circle',{cx:500,cy:310,r:82,fill:'none',stroke,'stroke-width':2},root);el('circle',{cx:500,cy:310,r:3,fill:stroke},root);
+  rect(8,155,165,310);rect(8,225,62,170);rect(827,155,165,310);rect(930,225,62,170);
+  el('path',{d:'M 173 247 A 82 82 0 0 1 173 373',fill:'none',stroke,'stroke-width':2},root);el('path',{d:'M 827 247 A 82 82 0 0 0 827 373',fill:'none',stroke,'stroke-width':2},root);
+  el('circle',{cx:118,cy:310,r:3,fill:stroke},root);el('circle',{cx:882,cy:310,r:3,fill:stroke},root);
+  rect(0,260,8,100);rect(992,260,8,100);
+ }else{
+  // Half pitch: goal line and both boxes at the top; halfway line at the bottom.
+  rect(335,8,330,165); rect(400,8,200,62);
+  // Penalty mark and penalty arc beyond the penalty-area line.
+  el('circle',{cx:500,cy:118,r:3,fill:stroke},root);
+  el('path',{d:'M 439 173 A 82 82 0 0 0 561 173',fill:'none',stroke,'stroke-width':2},root);
+  // Halfway line and the visible half of the centre circle.
+  line(8,612,992,612);
+  el('path',{d:'M 418 612 A 82 82 0 0 1 582 612',fill:'none',stroke,'stroke-width':2},root);
+  el('circle',{cx:500,cy:612,r:3,fill:stroke},root);
+  // Goal frame sits just outside the goal line.
+  el('rect',{x:450,y:0,width:100,height:8,fill:'none',stroke,'stroke-width':3},root);
+ }
+ // Full field has four corner arcs; half field has the two corners by the goal line.
+ const cr=17;
+ const corners=state.fieldType==='full'
+  ? [[8,8,1,1],[992,8,-1,1],[8,612,1,-1],[992,612,-1,-1]]
+  : [[8,8,1,1],[992,8,-1,1]];
+ corners.forEach(([x,y,sx,sy])=>el('path',{d:`M ${x} ${y+sy*cr} A ${cr} ${cr} 0 0 0 ${x+sx*cr} ${y}`,fill:'none',stroke,'stroke-width':2},root));
+ }
+}
+function render(){
+ svg.innerHTML='';pitchMarkup();
+ const orient=state.orientation==='portrait';svg.style.aspectRatio=orient?'620 / 1000':'1000 / 620';
+ const root=el('g',orient?{transform:'translate(0 1000) rotate(-90)'}:{});
+ state.objects.forEach(o=>renderObject(o,root));
+ state.players.filter(p=>p.placed).forEach(p=>renderPlayer(p,root));
+ $('boardTitle').value=state.title||'';$('canvasTitle').value=state.title||'';$('boardDesc').value=state.desc||'';$('fieldType').value=state.fieldType;$('orientation').value=state.orientation;$('pitchStyle').value=state.pitchStyle;$('arrowColor').value=state.arrowColor||'#ffd34f';
+ renderLists();renderSelection();updateUndo();renderBoardTabs();$('printTitle').textContent=state.title||'Тактична схема';$('printDesc').textContent=state.desc||'';$('printFooter').textContent='TACTICAL BOARD · '+new Date().toLocaleDateString('uk-UA');
+}
+function renderObject(o,parent){
+ const g=el('g',{'data-id':o.id,cursor:'pointer'},parent);if(state.selected===o.id)el('rect',{x:Math.min(o.x1??o.x,o.x2??o.x)-7,y:Math.min(o.y1??o.y,o.y2??o.y)-7,width:Math.abs((o.x2??o.x)-(o.x1??o.x))+14,height:Math.abs((o.y2??o.y)-(o.y1??o.y))+14,fill:'none',stroke:'#48d597','stroke-dasharray':'5 4','stroke-width':2},g);
+ const c=o.color||'#ffd34f',sw=o.size||3,common={'stroke':c,'stroke-width':sw,'stroke-linecap':'round','stroke-linejoin':'round',fill:'none'};
+ if(o.type==='zigzag'){const dx=o.x2-o.x1,dy=o.y2-o.y1,len=Math.hypot(dx,dy)||1,px=-dy/len,py=dx/len,n=Math.max(4,Math.floor(len/24)),amp=Math.min(18,len/8),pts=[];for(let i=0;i<=n;i++){const t=i/n,off=(i===0||i===n)?0:(i%2?amp:-amp);pts.push(`${o.x1+dx*t+px*off},${o.y1+dy*t+py*off}`)}el('polyline',{points:pts.join(' '),...common},g);addArrowHead(g,o.x2,o.y2,Math.atan2(dy,dx),c,Math.max(12,sw*4));
+ }else if(o.type==='chip'){const r=o.r||25;el('polygon',{points:`${o.x},${o.y-r} ${o.x+r*.86},${o.y+r*.5} ${o.x-r*.86},${o.y+r*.5}`,fill:c,stroke:'#17212a','stroke-width':2},g);el('circle',{cx:o.x,cy:o.y+r*.08,r:r*.13,fill:'#fff','fill-opacity':.9},g)
+ }else if(o.type==='arrow'||o.type==='dashed'||o.type==='line'){
+  const attrs={x1:o.x1,y1:o.y1,x2:o.x2,y2:o.y2,...common};if(o.type==='dashed'||o.lineType==='dashed')attrs['stroke-dasharray']='10 7';if(o.lineType==='dotted')attrs['stroke-dasharray']='2 7';
+  el('line',attrs,g);
+  if(o.type==='arrow'||o.type==='dashed')addArrowHead(g,o.x2,o.y2,Math.atan2(o.y2-o.y1,o.x2-o.x1),c,Math.max(12,sw*4));
+ }else if(o.type==='curve'){
+  const mx=o.cx??((o.x1+o.x2)/2),my=o.cy??((o.y1+o.y2)/2-75);el('path',{d:`M${o.x1},${o.y1} Q${mx},${my} ${o.x2},${o.y2}`,...common},g);
+  addArrowHead(g,o.x2,o.y2,Math.atan2(o.y2-my,o.x2-mx),c,Math.max(12,sw*4));
+ }else if(o.type==='text'){textNode(g,o.x,o.y,o.text||'Текст',{fill:c,'font-size':o.size*5+12,'font-weight':'700','paint-order':'stroke','stroke':'#173526','stroke-width':2})}
+ else if(o.type==='circle'){el('circle',{cx:o.x,cy:o.y,r:o.r||34,stroke:c,'stroke-width':sw,fill:c,'fill-opacity':.08},g)}
+ else if(o.type==='rect'){el('rect',{x:o.x1,y:o.y1,width:o.x2-o.x1,height:o.y2-o.y1,stroke:c,'stroke-width':sw,fill:c,'fill-opacity':.12},g)}
+ else if(o.type==='square'){el('rect',{x:o.x-25-(o.size||3),y:o.y-25-(o.size||3),width:50+(o.size||3)*2,height:50+(o.size||3)*2,stroke:c,'stroke-width':sw,fill:c,'fill-opacity':.12},g)}
+ else if(o.type==='diamond'){el('polygon',{points:`${o.x},${o.y-(o.r||34)} ${o.x+(o.r||34)},${o.y} ${o.x},${o.y+(o.r||34)} ${o.x-(o.r||34)},${o.y}`,stroke:c,'stroke-width':sw,fill:c,'fill-opacity':.12},g)}
+ else if(o.type==='ball'){const br=o.r||18;el('circle',{cx:o.x,cy:o.y,r:br,fill:'#fff',stroke:'#17212a','stroke-width':Math.max(1.5,sw)},g);const pent=regularPolygon(o.x,o.y,br*.30,5,-Math.PI/2);el('polygon',{points:pent,fill:'#17212a',stroke:'#17212a','stroke-width':.7},g);for(let i=0;i<5;i++){const a=-Math.PI/2+i*Math.PI*2/5;const px=o.x+Math.cos(a)*br*.68,py=o.y+Math.sin(a)*br*.68;const pts=regularPolygon(px,py,br*.13,5,a);el('polygon',{points:pts,fill:'#17212a',stroke:'#17212a','stroke-width':.5},g)}}
+ if(state.selected===o.id && o.type==='rect'){
+  [['nw',o.x1,o.y1],['ne',o.x2,o.y1],['sw',o.x1,o.y2],['se',o.x2,o.y2]].forEach(([h,x,y])=>el('rect',{'data-handle':h,x:x-7,y:y-7,width:14,height:14,rx:2,fill:'#fff',stroke:'#0b1720','stroke-width':2,cursor:'nwse-resize'},g));
+ }
+ if(state.selected===o.id && o.type==='circle')el('circle',{'data-handle':'radius',cx:o.x+(o.r||34),cy:o.y,r:8,fill:'#fff',stroke:'#0b1720','stroke-width':3,cursor:'ew-resize'},g);
+ if(state.selected===o.id && ['arrow','dashed','line','curve','zigzag'].includes(o.type)){
+  [['start',o.x1,o.y1],['end',o.x2,o.y2]].forEach(([h,x,y])=>el('circle',{'data-handle':h,cx:x,cy:y,r:9,fill:'#fff',stroke:'#0b1720','stroke-width':3,cursor:'crosshair'},g));
+  if(o.type==='curve'){const cx=o.cx??((o.x1+o.x2)/2),cy=o.cy??((o.y1+o.y2)/2-75);el('circle',{'data-handle':'curve',cx,cy,r:8,fill:'#48d597',stroke:'#0b1720','stroke-width':3,cursor:'move'},g)}
+ }
+}
+function addArrowHead(parent,x,y,angle,color,size){const back=size,half=size*.48, bx=x-Math.cos(angle)*back, by=y-Math.sin(angle)*back;const p1=`${x},${y}`,p2=`${bx+Math.cos(angle+Math.PI/2)*half},${by+Math.sin(angle+Math.PI/2)*half}`,p3=`${bx+Math.cos(angle-Math.PI/2)*half},${by+Math.sin(angle-Math.PI/2)*half}`;el('polygon',{points:`${p1} ${p2} ${p3}`,fill:color,stroke:color,'stroke-width':1},parent)}
+function regularPolygon(cx,cy,r,n,rotation=0){return Array.from({length:n},(_,i)=>`${cx+Math.cos(rotation+i*Math.PI*2/n)*r},${cy+Math.sin(rotation+i*Math.PI*2/n)*r}`).join(' ')}
+function safeId(s){return String(s).replace(/[^a-zA-Z0-9_-]/g,'')}
+function renderPlayer(p,parent){
+ const g=el('g',{'data-id':p.id,cursor:'grab'},parent);
+ const color=p.color||'#f4f6f8',r=p.size||24;
+ if(state.selected===p.id)el('circle',{cx:p.x,cy:p.y,r:r+6,fill:'none',stroke:'#48d597','stroke-width':3,'stroke-dasharray':'4 3'},g);
+ const pr=p.size||r;
+ if(p.team==='opp'){el('circle',{cx:p.x,cy:p.y,r:pr,fill:color,stroke:'#10241a','stroke-width':2},g);if(p.name)textNode(g,p.x,p.y+pr+15,p.name,{fill:'#fff','font-size':15,'font-weight':700,'text-anchor':'middle','paint-order':'stroke','stroke':'#173526','stroke-width':3});return}
+ if(p.photo){const shape=p.shape||'circle';if(shape==='square')el('rect',{x:p.x-pr,y:p.y-pr,width:pr*2,height:pr*2,fill:color,stroke:'#10241a','stroke-width':2},g);else if(shape==='diamond')el('polygon',{points:`${p.x},${p.y-pr} ${p.x+pr},${p.y} ${p.x},${p.y+pr} ${p.x-pr},${p.y}`,fill:color,stroke:'#10241a','stroke-width':2},g);else el('circle',{cx:p.x,cy:p.y,r:pr,fill:color,stroke:'#10241a','stroke-width':2},g);const clip=el('clipPath',{id:'clip-'+safeId(p.id)},g);if(shape==='square')el('rect',{x:p.x-pr+2,y:p.y-pr+2,width:(pr-2)*2,height:(pr-2)*2},clip);else if(shape==='diamond')el('polygon',{points:`${p.x},${p.y-pr+2} ${p.x+pr-2},${p.y} ${p.x},${p.y+pr-2} ${p.x-pr+2},${p.y}`},clip);else el('circle',{cx:p.x,cy:p.y,r:pr-2},clip);el('image',{href:p.photo,x:p.x-pr+2,y:p.y-pr+2,width:(pr-2)*2,height:(pr-2)*2,preserveAspectRatio:'xMidYMid slice','clip-path':`url(#clip-${safeId(p.id)})`},g);textNode(g,p.x+pr+7,p.y+5,String(p.number??''),{fill:'#fff','font-size':14,'font-weight':800,'text-anchor':'start','paint-order':'stroke','stroke':'#173526','stroke-width':3});textNode(g,p.x+pr+7,p.y+21,p.name||'',{fill:'#fff','font-size':14,'font-weight':700,'text-anchor':'start','paint-order':'stroke','stroke':'#173526','stroke-width':3})}
+ else {if(p.shape==='square')el('rect',{x:p.x-pr,y:p.y-pr,width:pr*2,height:pr*2,fill:color,stroke:'#10241a','stroke-width':2},g);else if(p.shape==='diamond')el('polygon',{points:`${p.x},${p.y-pr} ${p.x+pr},${p.y} ${p.x},${p.y+pr} ${p.x-pr},${p.y}`,fill:color,stroke:'#10241a','stroke-width':2},g);else el('circle',{cx:p.x,cy:p.y,r:pr,fill:color,stroke:'#10241a','stroke-width':2},g);textNode(g,p.x,p.y+5,String(p.number??''),{fill:contrast(color),'font-size':16,'font-weight':800,'text-anchor':'middle'});textNode(g,p.x,p.y+pr+15,p.name||'',{fill:'#fff','font-size':15,'font-weight':700,'text-anchor':'middle','paint-order':'stroke','stroke':'#173526','stroke-width':3})}
+}
+function contrast(hex){return ['#f4f6f8','#ffffff','#ffff00','#ffcc44'].includes(hex.toLowerCase())?'#17212a':'#fff'}
+function renderLists(){
+ const make=(id,team)=>{const box=$(id);box.innerHTML='';state.players.filter(p=>p.team===team).forEach(p=>{const item=document.createElement('div');item.className='player-item';const mini=document.createElement('div');mini.className='mini';mini.style.background=p.color||'#fff';mini.textContent=team==='opp'?'●':p.number;const name=document.createElement('div');name.className='pname';name.textContent=(p.name||'Без прізвища')+(p.position?' · '+p.position:'');const add=document.createElement('button');add.textContent='На поле';add.title='Додати / вибрати на полі';add.onclick=()=>{if(!p.placed){snapshot();p.x=team==='own'?220:780;p.y=team==='own'?180+Math.random()*260:180+Math.random()*260;p.placed=true}state.selected=p.id;render()};const del=document.createElement('button');del.textContent='×';del.title='Видалити гравця';del.onclick=()=>{snapshot();state.players=state.players.filter(q=>q.id!==p.id);if(state.selected===p.id)state.selected=null;render()};item.append(mini,name,add,del);box.appendChild(item)})};
+ make('ownPlayers','own');make('oppPlayers','opp');
+ const q=($('librarySearch').value||'').toLowerCase();const lb=$('libraryList');lb.innerHTML='';
+ const filtered=library.filter(x=>x.title.toLowerCase().includes(q));if(!filtered.length){lb.innerHTML='<div class="empty">Поки що немає збережених схем.</div>'}
+ filtered.forEach((x,i)=>{const row=document.createElement('div');row.className='library-item';const span=document.createElement('span');span.textContent=x.title;const load=document.createElement('button');load.textContent='Відкрити';load.onclick=()=>{if(confirm('Відкрити цю схему? Незбережені зміни буде замінено.')){snapshot();state=clone(x.state);render();persist()}};const del=document.createElement('button');del.textContent='×';del.title='Видалити з бібліотеки';del.onclick=()=>{library=library.filter(y=>y.id!==x.id);persist();renderLists()};row.append(span,load,del);lb.appendChild(row)})
+}
+function renderPalettes(){
+ for(const [id,inputId] of [['selPalette','selColor'],['arrowPalette','arrowColor']]){const box=$(id);if(!box)continue;box.innerHTML='';const value=($(inputId).value||'#FFD34F').toUpperCase();PALETTE.forEach(item=>{const color=item.hex,b=document.createElement('button');b.type='button';b.className='swatch'+(value===color?' active':'');b.style.background=color;b.title=item.name;b.setAttribute('aria-label','Колір '+item.name);b.onclick=()=>{ $(inputId).value=color;state.arrowColor=color; if(inputId==='arrowColor'){persist();renderPalettes()}else{const o=state.players.find(p=>p.id===state.selected)||state.objects.find(p=>p.id===state.selected);if(o){snapshot();o.color=color;render()}else{persist();renderPalettes()}} };box.appendChild(b)})}
+}
+function renderSelection(){
+ const o=state.players.find(p=>p.id===state.selected)||state.objects.find(p=>p.id===state.selected);
+ $('noSelection').classList.toggle('hidden',!!o);$('selectionPanel').classList.toggle('hidden',!o);$('photoEditorWrap').classList.toggle('hidden',!o||!state.players.some(p=>p.id===o.id));
+ if(!o)return;$('selLabel').value=o.name??o.text??'';$('selColor').value=o.color|| (o.team==='opp'?'#FF5A5F':'#FFD34F');renderPalettes();$('selSize').value=o.team?Math.max(1,Math.min(12,Math.round((o.size||24)/(o.team==='opp'?3:4)))):(o.size||3);$('selShape').value=o.shape||(['arrow','line','dashed','curve','circle','rect','square','diamond','ball','chip','zigzag'].includes(o.type)?o.type:'default');$('selWidth').value=Math.max(20,Math.min(400,Math.abs((o.x2??o.x??0)-(o.x1??o.x??0))||100));$('selHeight').value=Math.max(20,Math.min(400,Math.abs((o.y2??o.y??0)-(o.y1??o.y??0))||100));const opts=o.team?['default','circle','square','diamond']:o.type==='text'?['default']:o.type==='ball'?['ball','circle','square','diamond']:['arrow','line','dashed','curve','zigzag','circle','rect','square','diamond','ball','chip'];$('selShape').innerHTML=opts.map(v=>`<option value="${v}">${({default:'За замовчуванням',circle:'Коло',square:'Квадратна форма',diamond:'Ромб',arrow:'Стрілка',line:'Пряма лінія',dashed:'Пунктирна стрілка',curve:'Дугова стрілка',rect:'Прямокутна зона',ball:'М’яч',chip:'Фішка',zigzag:'Зигзаг-стрілка'})[v]||v}</option>`).join('');$('selShape').value=o.shape||(['arrow','line','dashed','curve','circle','rect','square','diamond','ball','chip','zigzag'].includes(o.type)?o.type:'default');
+}
+function id(){return 'obj-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7)}
+function addPlayer(team){const n=team==='own'?$('playerNumber').value:'',name=team==='own'?$('playerName').value.trim():$('oppName').value.trim();if(team==='own'&&!n&&!name){alert('Вкажи номер або прізвище гравця.');return}if(team==='opp'&&!name){/* суперників можна додавати без підпису */}snapshot();state.players.push({id:id(),team,number:n||'',name:name||'',position:team==='own'?$('playerPosition').value.trim():'',color:team==='own'?$('ownColor').value:$('oppColor').value,x:team==='own'?210:790,y:310,placed:false,photo:team==='own'?photoData:null});if(team==='own'){const num=Number(n);if(Number.isFinite(num))$('playerNumber').value=num+1;$('playerName').value='';$('playerPosition').value='';photoData=null;$('playerPhoto').value=''}render()}
+function selectTool(t){state.tool=t;document.querySelectorAll('[data-tool]').forEach(b=>b.classList.toggle('active',b.dataset.tool===t));$('statusText').textContent='Інструмент: '+({select:'вибір',arrow:'стрілка',dashed:'пунктир',curve:'дугова стрілка',line:'лінія',text:'текст',circle:'коло',rect:'зона',ball:'м’яч',chip:'фішка',zigzag:'зигзаг-стрілка'}[t]||t)}
+svg.addEventListener('pointerdown',e=>{
+ const handle=e.target.closest('[data-handle]');
+ if(state.tool==='select'&&handle){const g=handle.closest('[data-id]');if(g){state.selected=g.dataset.id;drag={id:state.selected,handle:handle.dataset.handle,start:fieldPoint(e),before:clone(state),moved:false};svg.setPointerCapture(e.pointerId);renderSelection();e.preventDefault();return}}
+ const g=e.target.closest('[data-id]');if(state.tool==='select'){
+  if(g){const oid=g.dataset.id;state.selected=oid;const p=state.players.find(x=>x.id===oid);if(p){drag={id:oid,start:fieldPoint(e),before:clone(state),moved:false};svg.setPointerCapture(e.pointerId)}else{drag={id:oid,start:fieldPoint(e),before:clone(state),moved:false};svg.setPointerCapture(e.pointerId);}renderSelection();return}
+  state.selected=null;renderSelection();render();return;
+ }
+ const pt=fieldPoint(e);if(state.tool==='text'){const t=prompt('Текст на схемі:','Нова примітка');if(t){snapshot();state.objects.push({id:id(),type:'text',x:pt.x,y:pt.y,text:t,color:state.arrowColor,size:3});state.selected=state.objects.at(-1).id;render()}return}
+ if(state.tool==='chip'){snapshot();state.objects.push({id:id(),type:'chip',x:pt.x,y:pt.y,r:25,color:state.arrowColor,size:3});state.selected=state.objects.at(-1).id;render();return}
+ if(state.tool==='ball'){snapshot();state.objects.push({id:id(),type:'ball',x:pt.x,y:pt.y});state.selected=state.objects.at(-1).id;render();return}
+ if(state.tool==='circle'){snapshot();state.objects.push({id:id(),type:'circle',x:pt.x,y:pt.y,r:35,color:state.arrowColor,size:3});state.selected=state.objects.at(-1).id;render();return}
+ drawStart=pt;svg.setPointerCapture(e.pointerId);
+});
+svg.addEventListener('pointermove',e=>{if(drag){const pt=fieldPoint(e),dx=pt.x-drag.start.x,dy=pt.y-drag.start.y;const p=state.players.find(x=>x.id===drag.id),o=state.objects.find(x=>x.id===drag.id);if(p){p.x=pt.x;p.y=pt.y;drag.moved=true;render()}else if(o){if(drag.handle==='start'){o.x1=pt.x;o.y1=pt.y}else if(drag.handle==='end'){o.x2=pt.x;o.y2=pt.y}else if(drag.handle==='curve'){o.cx=pt.x;o.cy=pt.y}else if(['nw','ne','sw','se'].includes(drag.handle)&&o.type==='rect'){const ox=(drag.handle.includes('w')?o.x2:o.x1),oy=(drag.handle.includes('n')?o.y2:o.y1);const nx=Math.min(pt.x,ox),xx=Math.max(pt.x,ox),ny=Math.min(pt.y,oy),yy=Math.max(pt.y,oy);o.x1=nx;o.x2=xx;o.y1=ny;o.y2=yy}else if(drag.handle==='radius'&&o.type==='circle'){o.r=Math.max(8,Math.hypot(pt.x-o.x,pt.y-o.y))}else if('x1'in o){o.x1+=dx;o.x2+=dx;o.y1+=dy;o.y2+=dy;if(o.type==='curve'&&o.cx!=null){o.cx+=dx;o.cy+=dy}}else{o.x+=dx;o.y+=dy}drag.start=pt;drag.moved=true;render()}return}});
+svg.addEventListener('pointerup',e=>{
+ if(drag){if(drag.moved){undoStack.push(drag.before);if(undoStack.length>80)undoStack.shift();redoStack=[];persist();updateUndo()}drag=null;return}
+ if(!drawStart)return;const end=fieldPoint(e),start=drawStart;drawStart=null;snapshot();
+ if(state.tool==='rect')state.objects.push({id:id(),type:'rect',x1:start.x,y1:start.y,x2:end.x,y2:end.y,color:state.arrowColor,size:3});
+ else state.objects.push({id:id(),type:state.tool==='line'?'line':state.tool==='curve'?'curve':state.tool==='dashed'?'dashed':state.tool==='zigzag'?'zigzag':'arrow',x1:start.x,y1:start.y,x2:end.x,y2:end.y,color:state.arrowColor,size:3});
+ state.selected=state.objects.at(-1).id;render();
+});
+svg.addEventListener('click',e=>{if(state.tool==='select')return;const g=e.target.closest('[data-id]');if(g&&state.tool!=='select'){state.selected=g.dataset.id;renderSelection()}});
+$('addPlayerBtn').onclick=()=>addPlayer('own');$('addOppBtn').onclick=()=>addPlayer('opp');
+$('playerPhoto').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{photoData=r.result};r.readAsDataURL(f)};
+$('clearPhotoBtn').onclick=()=>{photoData=null;$('playerPhoto').value=''};
+$('editPhoto').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const p=state.players.find(x=>x.id===state.selected);if(p){snapshot();p.photo=r.result;render()}};r.readAsDataURL(f)};
+document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>selectTool(b.dataset.tool));
+$('fieldImage').onchange=e=>{const f=e.target.files[0];if(!f)return;if(!f.type.startsWith('image/')){alert('Обери файл зображення.');return}const reader=new FileReader();reader.onload=()=>{snapshot();state.fieldImage=reader.result;render()};reader.readAsDataURL(f)};$('clearFieldImage').onclick=()=>{snapshot();state.fieldImage=null;$('fieldImage').value='';render()};
+$('fieldType').onchange=e=>{snapshot();state.fieldType=e.target.value;render()};$('orientation').onchange=e=>{snapshot();state.orientation=e.target.value;render()};$('pitchStyle').onchange=e=>{snapshot();state.pitchStyle=e.target.value;render()};
+$('boardTitle').onchange=e=>{state.title=e.target.value; $('canvasTitle').value=state.title;persist();$('printTitle').textContent=state.title};$('canvasTitle').oninput=e=>{state.title=e.target.value;$('boardTitle').value=state.title;$('printTitle').textContent=state.title;persist()};$('boardDesc').onchange=e=>{state.desc=e.target.value;persist();$('printDesc').textContent=state.desc};$('arrowColor').onchange=e=>{state.arrowColor=e.target.value.toUpperCase();persist();renderPalettes()};$('selColor').onchange=()=>renderPalettes();
+$('applySelection').onclick=()=>{const o=state.players.find(p=>p.id===state.selected)||state.objects.find(p=>p.id===state.selected);if(!o)return;snapshot();if('name'in o)o.name=$('selLabel').value;else if('text'in o)o.text=$('selLabel').value;o.color=$('selColor').value;o.size=Number($('selSize').value);const shape=$('selShape').value;if(o.team){if(shape==='square'||shape==='diamond'||shape==='circle'||shape==='default')o.shape=shape==='default'?'circle':shape;o.size=Math.max(10,Number($('selSize').value)*4);if(o.team==='opp')o.size=Math.max(12,Number($('selSize').value)*3)}else{if(['arrow','line','dashed','curve','circle','rect','square','diamond','ball','chip','zigzag'].includes(shape)){if(o.type==='rect'&&shape==='rect'){/* retain dimensions */}else if(shape==='circle'||shape==='square'||shape==='diamond'||shape==='ball'||shape==='chip'){const x=o.x??((o.x1+o.x2)/2),y=o.y??((o.y1+o.y2)/2);o.x=x;o.y=y;o.r=Math.max(12,Number($('selSize').value)*5);o.type=shape}else if(['arrow','line','dashed','curve','zigzag'].includes(shape)){if(!('x1'in o)){o.x1=o.x-50;o.y1=o.y;o.x2=o.x+50;o.y2=o.y;o.type=shape}else o.type=shape}}if(o.type==='chip')o.r=Math.max(16,Number($('selSize').value)*7);if(o.type==='ball')o.r=Math.max(12,Number($('selSize').value)*3);if(o.type==='circle'||o.type==='diamond')o.r=Math.max(12,Number($('selSize').value)*5);if(o.type==='rect'&&o.x1!=null){const w=Number($('selWidth').value),h=Number($('selHeight').value),cx=(o.x1+o.x2)/2,cy=(o.y1+o.y2)/2;o.x1=cx-w/2;o.x2=cx+w/2;o.y1=cy-h/2;o.y2=cy+h/2}else if(['arrow','line','dashed','curve','zigzag'].includes(o.type)&&o.x1!=null){const w=Number($('selWidth').value),h=Number($('selHeight').value),cx=(o.x1+o.x2)/2,cy=(o.y1+o.y2)/2,dx=o.x2>=o.x1?1:-1,dy=o.y2>=o.y1?1:-1;o.x1=cx-dx*w/2;o.x2=cx+dx*w/2;o.y1=cy-dy*h/2;o.y2=cy+dy*h/2}}render()};
+$('deleteBtn').onclick=()=>{if(!state.selected)return;snapshot();state.players=state.players.filter(p=>p.id!==state.selected);state.objects=state.objects.filter(o=>o.id!==state.selected);state.selected=null;render()};
+$('clearBtn').onclick=()=>{if(confirm('Очистити всі гравці та позначки з поля?')){snapshot();state.players.forEach(p=>p.placed=false);state.players=[];state.objects=[];state.selected=null;render()}};
+function undo(){if(!undoStack.length)return;redoStack.push(clone(state));state=undoStack.pop();persist();render()}function redo(){if(!redoStack.length)return;undoStack.push(clone(state));state=redoStack.pop();persist();render()}
+$('undoBtn').onclick=undo;$('redoBtn').onclick=redo;document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();undo()}if((e.ctrlKey||e.metaKey)&&(e.key.toLowerCase()==='y'||(e.shiftKey&&e.key.toLowerCase()==='z'))){e.preventDefault();redo()}if(e.key==='Delete'&&state.selected&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName))$('deleteBtn').click()});
+$('saveBtn').onclick=()=>{state.title=$('boardTitle').value;state.desc=$('boardDesc').value;persist();const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});download(blob,slug(state.title)+'.json');$('statusText').textContent='Проєкт збережено та завантажено у форматі JSON'};
+$('saveLibraryBtn').onclick=()=>{state.title=$('boardTitle').value;state.desc=$('boardDesc').value;const title=prompt('Назва для бібліотеки:',state.title||'Тактична схема');if(!title)return;library.unshift({id:id(),title,state:clone(state),savedAt:new Date().toISOString()});persist();renderLists()};
+$('exportProjectBtn').onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});download(blob,slug(state.title)+'.json')};
+$('importProject').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const s=JSON.parse(r.result);if(!s.players||!s.objects)throw Error();snapshot();state=s;render();persist()}catch(err){alert('Не вдалося прочитати файл проєкту.')}e.target.value=''};r.readAsText(f)};
+$('addPdfBtn').onclick=()=>openPdfPicker([activeBoardId]);$('batchPdfBtn').onclick=()=>openPdfPicker();$('cancelPdfPicker').onclick=()=> $('pdfPicker').classList.add('hidden');$('confirmPdfPicker').onclick=()=>{const ids=[...document.querySelectorAll('#pdfBoardChoices input:checked')].map(x=>x.value);if(!ids.length){alert('Познач хоча б одну дошку.');return}$('pdfPicker').classList.add('hidden');printBoards(ids)};
+function openPdfPicker(preselect=[]){persist();const box=$('pdfBoardChoices');box.innerHTML='';boards.forEach((b,i)=>{const label=document.createElement('label');label.className='pdf-check';const cb=document.createElement('input');cb.type='checkbox';cb.value=b.id;cb.checked=preselect.length?preselect.includes(b.id):true;const name=document.createElement('span');name.textContent=(i+1)+'. '+(b.state.title||b.name||'Дошка '+(i+1));label.append(cb,name);box.append(label)});$('pdfPicker').classList.remove('hidden');$('pdfPicker').style.display='flex'}
+function printBoards(ids){persist();const original=clone(state),holder=$('pdfBatchPrint'),chosen=boards.filter(b=>ids.includes(b.id));holder.innerHTML='';chosen.forEach(b=>{state=clone(b.state);state.selected=null;render();const sheet=document.createElement('section');sheet.className='pdf-sheet '+(state.orientation==='portrait'?'portrait':'landscape');const h=document.createElement('h1');h.className='pdf-title';h.textContent=state.title||'Тактична схема';sheet.appendChild(h);if(state.desc){const d=document.createElement('div');d.className='pdf-desc';d.textContent=state.desc;sheet.appendChild(d)}const copy=svg.cloneNode(true);copy.setAttribute('xmlns',NS);sheet.appendChild(copy);holder.appendChild(sheet)});state=original;render();document.body.classList.add('printing','batch-print');document.body.classList.toggle('portrait-print',chosen.some(b=>b.state.orientation==='portrait'));window.print();setTimeout(()=>{document.body.classList.remove('printing','batch-print','portrait-print');holder.innerHTML=''},1500)}
+function renderBoardTabs(){const bar=$('boardTabs');if(!bar)return;bar.innerHTML='';boards.forEach((b,i)=>{const wrap=document.createElement('div');wrap.className='board-tab';const btn=document.createElement('button');btn.className=b.id===activeBoardId?'active':'';btn.textContent=(i+1)+' · '+(b.state.title||b.name||'Дошка');btn.onclick=()=>switchBoard(b.id);wrap.appendChild(btn);if(boards.length>1){const x=document.createElement('button');x.textContent='×';x.title='Видалити дошку';x.onclick=()=>removeBoard(b.id);wrap.appendChild(x)}bar.appendChild(wrap)});const plus=document.createElement('button');plus.className='primary';plus.textContent='＋';plus.title='Додати дошку';plus.onclick=createBoard;bar.appendChild(plus)}
+function switchBoard(bid){persist();const b=boards.find(x=>x.id===bid);if(!b)return;activeBoardId=bid;state=clone(b.state);undoStack=[];redoStack=[];persist();render()}
+function createBoard(){persist();const players=clone(state.players||[]).map(p=>({...p,placed:false,x:p.team==='opp'?790:210,y:310}));const next={title:'Тактична схема '+(boards.length+1),desc:'',fieldType:state.fieldType||'full',orientation:state.orientation||'landscape',pitchStyle:state.pitchStyle||'grass',fieldImage:state.fieldImage||null,players,objects:[],selected:null,tool:'select',arrowColor:state.arrowColor||'#FFD34F',ownColor:state.ownColor||'#F4F6F8',oppColor:state.oppColor||'#FF5A5F'};const b={id:id(),name:next.title,state:clone(next)};boards.push(b);activeBoardId=b.id;state=next;undoStack=[];redoStack=[];persist();render();selectTool('select')}
+function removeBoard(bid){if(boards.length<2){alert('Потрібна хоча б одна дошка.');return}const b=boards.find(x=>x.id===bid);if(!confirm('Видалити дошку «'+(b?.state.title||b?.name)+'»?'))return;boards=boards.filter(x=>x.id!==bid);if(activeBoardId===bid){activeBoardId=boards[0].id;state=clone(boards[0].state)}persist();render()}
+$('librarySearch').oninput=renderLists;$('newBtn').onclick=createBoard;
+$('pdfBtn').onclick=()=>{state.title=$('boardTitle').value;state.desc=$('boardDesc').value;persist();document.body.classList.add('printing');document.body.classList.toggle('portrait-print',state.orientation==='portrait');window.print();setTimeout(()=>document.body.classList.remove('printing','portrait-print'),1000)};
+$('librarySearch').oninput=renderLists;$('newBtn').onclick=()=>{if(!confirm('Створити нову дошку? Перед цим збережи поточну, якщо вона потрібна.'))return;snapshot();state={title:'Нова тактична схема',desc:'',fieldType:'full',orientation:'landscape',pitchStyle:'grass',fieldImage:null,players:[],objects:[],selected:null,tool:'select',arrowColor:'#FFD34F',ownColor:'#F4F6F8',oppColor:'#FF5A5F'};render()};
+function download(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function slug(s){return (s||'tactical-board').toLowerCase().replace(/[^a-zа-я0-9_-]+/gi,'-').slice(0,60)||'tactical-board'}
+restore();render();renderPalettes();selectTool('select');
+})();
+</script>
+</body>
+</html>
